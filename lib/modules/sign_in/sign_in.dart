@@ -22,7 +22,8 @@ class _SignInScreenState extends State<SignInScreen> {
   late String password;
 
   bool showSpinner = false;
-  bool isPasswordShow=true;
+  bool isPasswordShow = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,19 +54,20 @@ class _SignInScreenState extends State<SignInScreen> {
                   height: 8,
                 ),
                 TextInput(
-                  type: TextInputType.text,
-                  isPassword: isPasswordShow,
-                  suffix:isPasswordShow? Icons.visibility_off:Icons.visibility,
-                  hintText: "Enter Your Password",
-                  onChanged: (value) {
-                    password = value;
-                  },
-                    suffixPressed: (){
+                    type: TextInputType.text,
+                    isPassword: isPasswordShow,
+                    suffix: isPasswordShow
+                        ? Icons.visibility_off
+                        : Icons.visibility,
+                    hintText: "Enter Your Password",
+                    onChanged: (value) {
+                      password = value;
+                    },
+                    suffixPressed: () {
                       setState(() {
-                        isPasswordShow=!isPasswordShow;
+                        isPasswordShow = !isPasswordShow;
                       });
-                    }
-                ),
+                    }),
                 const SizedBox(
                   height: 10,
                 ),
@@ -80,7 +82,8 @@ class _SignInScreenState extends State<SignInScreen> {
                       final user = await _auth.signInWithEmailAndPassword(
                           email: email, password: password);
                       if (user != null) {
-                        Navigator.pushNamed(context, ChatScreen.screenRoute);
+                        Navigator.pushReplacementNamed(
+                            context, ChatScreen.screenRoute);
                       }
                       setState(() {
                         showSpinner = false;

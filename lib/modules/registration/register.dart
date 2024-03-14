@@ -54,20 +54,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   height: 8,
                 ),
                 TextInput(
-                  type: TextInputType.text,
-                  isPassword: isPasswordShow,
-                  suffix:
-                      isPasswordShow ? Icons.visibility_off : Icons.visibility,
-                  hintText: "Enter Your Password",
-                  onChanged: (value) {
-                    password = value;
-                  },
-                    suffixPressed: (){
+                    type: TextInputType.text,
+                    isPassword: isPasswordShow,
+                    suffix: isPasswordShow
+                        ? Icons.visibility_off
+                        : Icons.visibility,
+                    hintText: "Enter Your Password",
+                    onChanged: (value) {
+                      password = value;
+                    },
+                    suffixPressed: () {
                       setState(() {
-                        isPasswordShow=!isPasswordShow;
+                        isPasswordShow = !isPasswordShow;
                       });
-                    }
-                ),
+                    }),
                 const SizedBox(
                   height: 10,
                 ),
@@ -81,7 +81,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     try {
                       await _auth.createUserWithEmailAndPassword(
                           email: email, password: password);
-                      Navigator.pushNamed(context, ChatScreen.screenRoute);
+                      Navigator.pushReplacementNamed(
+                          context, ChatScreen.screenRoute);
                       setState(() {
                         showSpinner = false;
                       });
